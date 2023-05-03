@@ -1,0 +1,148 @@
+.egg {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-image: url('../../images/egg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.egg_right {
+  background-image: url('../../images/egg-right.png');
+}
+
+.egg_top-left-0 {
+  display: none;
+}
+
+.egg_top-left-1 {
+  top: 122px;
+  left: 46px;
+  transform: rotate(60deg);
+}
+
+.egg_top-left-2 {
+  top: 132px;
+  left: 62px;
+  transform: rotate(100deg);
+}
+
+.egg_top-left-3 {
+  top: 142px;
+  left: 80px;
+  transform: rotate(180deg);
+}
+
+.egg_top-left-4 {
+  top: 152px;
+  left: 96px;
+  transform: rotate(290deg);
+}
+
+.egg_top-left-5 {
+  top: 160px;
+  left: 110px;
+  transform: rotate(360deg);
+}
+
+.egg_bottom-left-0 {
+  display: none;
+}
+
+.egg_bottom-left-1 {
+  top: 195px;
+  left: 46px;
+  transform: rotate(60deg);
+}
+
+.egg_bottom-left-2 {
+  top: 205px;
+  left: 62px;
+  transform: rotate(110deg);
+}
+
+.egg_bottom-left-3 {
+  top: 215px;
+  left: 80px;
+  transform: rotate(180deg);
+}
+
+.egg_bottom-left-4 {
+  top: 222px;
+  left: 96px;
+  transform: rotate(280deg);
+}
+
+.egg_bottom-left-5 {
+  top: 235px;
+  left: 108px;
+  transform: rotate(360deg);
+}
+
+.egg_top-right-0 {
+  display: none;
+}
+
+.egg_top-right-1 {
+  top: 122px;
+  right: 50px;
+  transform: rotate(-60deg);
+}
+
+.egg_top-right-2 {
+  top: 132px;
+  right: 66px;
+  transform: rotate(-100deg);
+}
+
+.egg_top-right-3 {
+  top: 142px;
+  right: 84px;
+  transform: rotate(-160deg);
+}
+
+.egg_top-right-4 {
+  top: 150px;
+  right: 99px;
+  transform: rotate(-280deg);
+}
+
+.egg_top-right-5 {
+  top: 162px;
+  right: 114px;
+  transform: rotate(-10deg);
+}
+
+.egg_bottom-right-0 {
+ display: none;
+}
+
+.egg_bottom-right-1 {
+  top: 195px;
+  right: 51px;
+  transform: rotate(-65deg);
+}
+
+.egg_bottom-right-2 {
+  top: 204px;
+  right: 66px;
+  transform: rotate(-100deg);
+}
+
+.egg_bottom-right-3 {
+  top: 215px;
+  right: 83px;
+  transform: rotate(-160deg);
+}
+
+.egg_bottom-right-4 {
+  top: 222px;
+  right: 99px;
+  transform: rotate(-270deg);
+}
+
+.egg_bottom-right-5 {
+  top: 235px;
+  right: 112px;
+  transform: rotate(10deg);
+}

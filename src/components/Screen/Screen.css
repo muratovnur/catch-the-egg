@@ -1,0 +1,81 @@
+.screen {
+  position: relative;
+  margin: 0 auto;
+  width: 572px;
+  height: 350px;
+
+  background-image: url('../../images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wolf {
+  display: none;
+  position: absolute;
+  bottom: 34px;
+  
+  width: 98px;
+  height: 152px;
+  
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wolf_left {
+  left: 180px;
+  background-image: url('../../images/wolf/wolf-p-0.png');
+}
+
+.wolf_right {
+  right: 182px;
+  background-image: url('../../images/wolf/wolf-p-1.png');
+}
+
+.wolf_display {
+  display: block;
+}
+
+.basket {
+  position: absolute;
+
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.basket_bottom {
+  width: 85px;
+  height: 65px;
+
+  background-image: url('../../images/basket/basket-p-0-0.png');
+}
+
+.basket_0-0 {
+  bottom: 51px;
+  left: 124px;
+}
+
+.basket_1-0 {
+  bottom: 43px;
+  right: 126px;
+
+  transform: scaleX(-1);
+}
+
+.basket_top {
+  width: 82px;
+  height: 78px;
+
+  background-image: url('../../images/basket/basket-p-0-1.png');
+}
+
+.basket_0-1 {
+  bottom: 115px;
+  left: 126px;
+}
+
+.basket_1-1 {
+  bottom: 107px;
+  right: 124px;
+  
+  transform: scaleX(-1);
+}
