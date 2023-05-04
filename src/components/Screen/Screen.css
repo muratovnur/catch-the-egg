@@ -9,6 +9,22 @@
   background-position: center;
 }
 
+.screen__scores {
+  margin: 20px 24px 0 0;
+  justify-items: left;
+  float: right;
+}
+
+.screen__misses {
+  position: absolute;
+  top: 114px;
+  left: 326px;
+  height: 32px;
+  background-image: url('../../images/misses.png');
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
 .wolf {
   display: none;
   position: absolute;

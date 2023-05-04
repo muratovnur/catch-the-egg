@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react'
 import './Egg.css'
 
-const Egg = ({ tick, eggPosX, eggPosY, checkIsEggCollected, startRoll, stopEggRoll }) => {
+const Egg = ({ 
+  tick, eggPosX, eggPosY, checkIsEggCollected, startRoll, stopEggRoll, isReset 
+}) => {
   
   const [eggStep, setEggStep] = useState(0);
   const [isStarted, setIsStarted] = useState(startRoll);
@@ -22,7 +24,10 @@ const Egg = ({ tick, eggPosX, eggPosY, checkIsEggCollected, startRoll, stopEggRo
     if (startRoll) {
       rollEgg()
     }
-  }, [tick])
+    if (isReset) {
+      setEggStep(0)
+    }
+  }, [tick, isReset])
 
   return (
     <>
