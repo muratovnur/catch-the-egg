@@ -1,4 +1,5 @@
 import React from 'react'
+import Controls from '../Controls/Controls'
 import './Menu.css'
 
 const Menu = ({ startGame, score, user, difficulty, changeDifficulty, toggleLeaderboard, isMusicToggled, toggleMusic }) => {
@@ -30,6 +31,7 @@ const Menu = ({ startGame, score, user, difficulty, changeDifficulty, toggleLead
           <span className='menu__username'>Username: {user.username}</span>
           <div className="menu__toggle-music" style={{backgroundColor: isMusicToggled ? '#ffffff80' : '#ffffff'}} onClick={toggleMusic}></div>
         </div>
+      <Controls />
       </div>
     </div>
   )

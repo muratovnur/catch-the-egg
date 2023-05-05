@@ -14,7 +14,7 @@
 
 .welcome__container {
   padding: 8px;
-  width: 30%;
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 8px;

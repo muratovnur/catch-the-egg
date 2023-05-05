@@ -12,6 +12,11 @@
 /build
 
 # misc
+.firebase
+.firebaserc
+.github
+firebase.json
+
 .DS_Store
 .env.local
 .env.development.local

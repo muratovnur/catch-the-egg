@@ -1,0 +1,12 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+
+  position: sticky;
+}
+
+.controls__image {
+  width: 62px;
+  height: 40px;
+  background: url('../../images/arrow-keys.png') center no-repeat;
+}

@@ -3,6 +3,7 @@ import Welcome from '../Welcome/Welcome';
 import Screen from '../Screen/Screen';
 import Menu from '../Menu/Menu';
 import Leaderboard from '../Leaderboard/Leaderboard';
+import Controls from '../Controls/Controls';
 import { db } from '../../firebase-config';
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import music from '../../audio/music.mp3'
@@ -160,7 +161,7 @@ function App() {
         addMisses={addMisses}
         difficulty={difficulty}
       />
-      <div className="music"><audio src='../../audio/music.mp3'></audio></div>
+      <Controls />
     </div>
   );
 }
