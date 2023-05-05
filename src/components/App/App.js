@@ -1,24 +1,26 @@
-import './App.css';
+import { useEffect, useRef, useState } from 'react';
+import Welcome from '../Welcome/Welcome';
 import Screen from '../Screen/Screen';
 import Menu from '../Menu/Menu';
 import Leaderboard from '../Leaderboard/Leaderboard';
-import { useRef, useState } from 'react';
+import { db } from '../../firebase-config';
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import music from '../../audio/music.mp3'
+import './App.css';
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [usernameExists, setUsernameExists] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(JSON.parse(localStorage.getItem('best')) || {'Easy': 0, 'Normal': 0, 'Hard': 0});
   const [misses, setMisses] = useState(0);
   const [difficulty, setDifficulty] = useState('Easy');
   const [showMenu, setShowMenu] = useState(true);
-  const [leaderboard, setLeaderboard] = useState(JSON.parse(localStorage.getItem('leaderboard')) || [{name: 'user2', score: 17}, {name: 'user1', score: 12}]);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [isMusicToggled, setIsMusicToggled] = useState(true);
   const musicRef = useRef(new Audio(music))
-  
-  
-  // console.log('bestScore local', localStorage.getItem('best'));
-  // console.log('bestScore', bestScore);
-
 
   function startGame() {
     setIsGameStarted(true);
@@ -26,23 +28,25 @@ function App() {
     setScore(0);
     setMisses(0);
 
-    musicRef.current.volume = .2;
-    musicRef.current.loop = true;
-    musicRef.current.play()
+    if (isMusicToggled) {
+      musicRef.current.volume = .2;
+      musicRef.current.loop = true;
+      musicRef.current.play()
+    }
   }
 
-  function stopGame() {
+  async function stopGame() {
     musicRef.current.pause();
     musicRef.current.currentTime = 0;
     
     setIsGameStarted(false);
     setShowMenu(true);
 
-    if (score > bestScore[difficulty]) {
-      //[TODO]: optimize saving best score
-      setBestScore(prev => {return {...prev, [difficulty]: score}})
-      localStorage.setItem('best', JSON.stringify({...bestScore, [difficulty]: score}));
-      console.log('bestScore', localStorage.getItem('best'));
+    if (score > user[difficulty]) {
+      await updateDoc(doc(db, 'users', user.username), {
+        [difficulty]: score
+      })
+      getUser()
     }
   }
 
@@ -58,31 +62,106 @@ function App() {
     setDifficulty(difficulty)
   }
 
-  console.log('app');
+  function toggleLeaderboard() {
+    setShowMenu(prev => !prev)
+    setShowLeaderboard(prev => !prev)
+  }
+
+  async function createUser(username) {
+    let usernameIsFree = true
+
+    users.forEach(user => {
+      if (user.username === username) {
+        usernameIsFree = false
+        return
+      }
+    })
+
+    if (usernameIsFree) {
+      setUsernameExists(false)
+      
+      const user = {
+        username,
+        Easy: 0,
+        Normal: 0,
+        Hard: 0,
+      }
+
+      await setDoc(doc(db, 'users', username), user)
+      //console.log('created user', user);
+      setUser(user)
+      localStorage.setItem('user', JSON.stringify(user))
+    } 
+    else {
+      setUsernameExists(true)
+    }
+  }
+
+  function changeLeaderboardByDifficulty(difficulty) {
+    setLeaderboard([...users].sort((a, b) => b[difficulty] - a[difficulty]))
+  }
+
+  async function getUser() {
+    try {
+      const userUpdated = await getDoc(doc(db, 'users', user.username))
+      const userUpdatedData = userUpdated.data()
+      //console.log('userUpdated', userUpdatedData);
+      setUser(userUpdatedData)
+      localStorage.setItem('user', JSON.stringify(userUpdatedData))  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function getUsers() {
+    try {
+      const users = await getDocs(collection(db, 'users'))
+      const usersArray = users.docs.map(user => user.data())
+
+      setUsers(usersArray)
+      changeLeaderboardByDifficulty(difficulty)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUsers();
+    getUser()
+  }, [])
 
   return (
+    // [TODO]: HOC for menu
     <div className="app">
-      {false && <Menu 
-                      startGame={startGame} 
-                      score={score} 
-                      bestScore={bestScore} 
-                      difficulty={difficulty}
-                      changeDifficulty={changeDifficulty}
+      {!user && <Welcome createUser={createUser} usernameExists={usernameExists} />}
+      {user && showMenu && <Menu 
+                            user={user} 
+                            startGame={startGame} 
+                            score={score} 
+                            difficulty={difficulty}
+                            changeDifficulty={changeDifficulty}
+                            toggleLeaderboard={toggleLeaderboard}
+                            isMusicToggled={isMusicToggled}
+                            toggleMusic={() => setIsMusicToggled(prev => !prev)}
+      />}
+      {showLeaderboard && <Leaderboard 
+                            leaderboard={leaderboard} 
+                            toggleLeaderboard={toggleLeaderboard} 
+                            changeLeaderboardByDifficulty={changeLeaderboardByDifficulty} 
+                            getUsers={getUsers}
       />}
       <Screen 
+        user={user}
         isGameStarted={isGameStarted} 
         stopGame={stopGame} 
         score={score} 
         addScore={addScore}
-        bestScore={bestScore}
         misses={misses}
         addMisses={addMisses}
         difficulty={difficulty}
       />
-      <Leaderboard leaderboard={leaderboard}></Leaderboard>
       <div className="music"><audio src='../../audio/music.mp3'></audio></div>
     </div>
-    
   );
 }
 

@@ -3,7 +3,7 @@ import Egg from '../Egg/Egg';
 import './Screen.css'
 
 const Screen = ({ 
-  isGameStarted, stopGame, score, bestScore, addScore, misses, addMisses, difficulty
+  isGameStarted, stopGame, score, user, addScore, misses, addMisses, difficulty
 }) => {
   const [wolfPos, setWolfPos] = useState('left');
   const [basketPos, setBasketPos] = useState('bottom');
@@ -16,11 +16,10 @@ const Screen = ({
   const currentDifficulty = useRef(1000);
 
   useEffect(() => {
-    if (difficulty === 'Easy') currentDifficulty.current = 1000
-    else if (difficulty === 'Normal') currentDifficulty.current = 600
+    if (difficulty === 'Easy') currentDifficulty.current = 800
+    else if (difficulty === 'Normal') currentDifficulty.current = 500
     else if (difficulty === 'Hard') currentDifficulty.current = 300
-
-    console.log('diff', currentDifficulty.current);
+    //console.log('diff', currentDifficulty.current);
   }, [difficulty])
 
   useEffect(() => {
@@ -29,10 +28,10 @@ const Screen = ({
 
     const tickInterval = setInterval(() => {
       if (isGameStarted) {
-        if (misses) {
-          console.log('game over');
+        if (misses > 3) {
           stopGame();
           resetEggs();
+
           window.removeEventListener('keydown', handlePositions)
           clearInterval(tickInterval)
         }
@@ -139,7 +138,7 @@ const Screen = ({
 
   return (
     <div className='screen'>
-      <div className='screen__scores'>Score: {score} Best: {bestScore[difficulty]}</div>
+      {user && <div className='screen__scores'>Score: {score} Best: {user[difficulty]}</div>}
       <div className={`screen__misses`} style={{'width': `${38*misses}px`}}></div>
 
       <div className={`wolf wolf_left ${wolfPos === 'left' && 'wolf_display'}`}></div>

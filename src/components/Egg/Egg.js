@@ -6,11 +6,9 @@ const Egg = ({
 }) => {
   
   const [eggStep, setEggStep] = useState(0);
-  const [isStarted, setIsStarted] = useState(startRoll);
   
   function rollEgg() {
     //console.log('they see me rolling, they hating', {startRoll}, {eggStep});
-  
     if (eggStep < 5) {
       setEggStep(prev => prev + 1)
     }
@@ -20,6 +18,7 @@ const Egg = ({
       setEggStep(0)
     }
   }
+
   useEffect(() => {
     if (startRoll) {
       rollEgg()
@@ -30,12 +29,8 @@ const Egg = ({
   }, [tick, isReset])
 
   return (
-    <>
-      <div className={`egg egg_${eggPosY}-${eggPosX}-${eggStep} egg_${eggPosX}`}></div>
-      {/* <div className={`egg egg_${eggPosY}-${eggStep} ${eggPosX}`}></div> */}
-    </>
+    <div className={`egg egg_${eggPosY}-${eggPosX}-${eggStep} egg_${eggPosX}`}></div>
   )
 }
 
 export default Egg;
-//export const MemoEgg = memo(Egg)

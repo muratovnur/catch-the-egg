@@ -14,7 +14,7 @@
 
 .leaderboard__container {
   padding: 8px;
-  width: 30%;
+  width: 340px;
   min-height: 300px;
   display: flex;
   flex-direction: column;
@@ -27,30 +27,35 @@
 }
 
 .leaderboard__title {
+  font-size: 2rem;
   line-height: 100%;
 }
 
 .leaderboard__table {
   width: 100%;
   min-height: 200px;
+  max-height: 200px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   list-style: none;
+  overflow-y: scroll;
 }
 
 .leaderboard__table-item {
+  padding: 0 4px;
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 1.5rem;
   line-height: 100%;
 }
 
 .leaderboard__button {
-  padding: 2px 6px;
+  font-size: 1.5rem;
+  padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
-  border: 1px solid #fff;
+  border: 1px solid #000;
 }
 
 .leaderboard__button:hover {
@@ -63,5 +68,9 @@
 }
 
 .leaderboard__button_active {
-  background-color: #402994;
+  background-color: #50D8E7;
+}
+
+.leaderboard__button_back {
+  background-color: #F9F871;
 }

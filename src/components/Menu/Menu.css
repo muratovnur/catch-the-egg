@@ -13,8 +13,8 @@
 }
 
 .menu__container {
-  padding: 8px;
-  width: 30%;
+  padding: 12px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -27,28 +27,44 @@
 }
 
 .menu__title {
+  font-size: 2rem;
   line-height: 100%;
 }
 
 .menu__score-text {
+  font-size: 1.5rem;
+  line-height: 100%;
+}
+
+.menu__score-value {
+  color: #D2E4D6;
+  font-size: 1.5rem;
   line-height: 100%;
 }
 
 .menu__button {
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 4px 8px;
   cursor: pointer;
-  border: 1px solid #fff;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 4px;
 }
 
 .menu__button:hover {
   opacity: .8;
 }
 
-.menu__button-start {
-  
-  
-  background-color: #ff6600d5;
+.menu__button_start {
+  border: 1px solid #000;
+  background-color: #A46856;
+  color: #000;
+}
+
+.menu__button_leaderboard {
+  border: 1px solid #000;
+  background-color: #F9F871;
+  color: #000;
 }
 
 .menu__buttons-difficulty {
@@ -57,5 +73,22 @@
 }
 
 .menu__button_active {
-  background-color: #402994;
+  background-color: #50D8E7;
+}
+
+.menu__additional {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu__toggle-music {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff80;
+  background-image: url('../../images/no-music.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
